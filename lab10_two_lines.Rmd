@@ -1,0 +1,118 @@
+---
+title: "Two Parallel Lines"
+subtitle: "Sleuth3 Chapters 9 and 10"
+output:
+  pdf_document:
+    fig_height: 2.8
+    fig_width: 6
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 3
+    fig_width: 5
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{vwcol}
+geometry: margin=0.5in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(gridExtra)
+```
+
+## Example 1: Adapted from Case Study 9.1 in Sleuth3
+
+Quote from the book:
+
+> Meadowfoam (*Limnanthes alba*) is a small plant found growing in moist meadows of the US Pacific Northwest.  It has been domesticated at Oregon State University for its seed oil... Researchers reported the results from one study in a series designed to find out how to elevate meadowfoam production to a profitable crop.In a controlled growth chamber, they focused on the effects of two light-related factors: light intensity, at the six levels of 150, 300, 450, 600, 750, and 900 $\mu$mol/m$^2$/sec; and the timing of the onset of the light treatment, either at photoperiodic floral induction (PFI) -- the time at which the photo period was increased from 8 to 16 hours er day to induce flowering -- or 24 days before PFI. ... (Data from M. Seddign and G. D. Jolliff, "Light Intensity Effects on Meadowfoam Growth and Flowering," *Crop Science* 34 (1994): 497-503.)
+
+In this experiment, the researchers planted 10 seedlings in each combination of timing and light intensity, and recorded the mean number of flowers per seedling among those 10 seedlings.  They did that twice for each of the 12 combinations of timing and intensity, resulting in a total of 24 observations for our analysis.
+
+The following R code reads the data in and displays the first few observations and the distinct values of the `Time` and `Intensity` variables.
+
+```{r, echo=FALSE, message=FALSE}
+meadowfoam <- read_csv("http://www.evanlray.com/data/sleuth3/case0901_meadowfoam.csv")
+head(meadowfoam)
+nrow(meadowfoam)
+meadowfoam %>%
+  distinct(
+    Time
+  )
+meadowfoam %>%
+  distinct(
+    Intensity
+  )
+```
+
+`Flowers` is our response variable, and `Time` and `Intensity` are our explanatory variables.
+
+Note that `Time` is currently coded as a numeric variable, either 1 for "Late" or 2 for "Early".  We need to tell R it's actually a categorical variable; this is referred to as a `factor` in R.  We can do this as follows:
+
+```{r}
+meadowfoam <- meadowfoam %>%
+  mutate(
+    Time = factor(Time, labels = c("Late", "Early"))
+  )
+head(meadowfoam)
+```
+
+#### 1. Make a plot of the data using `Flowers` for the vertical axis, `Intensity` for the horizontal axis, and `Time` for the color of points.
+
+```{r}
+
+```
+
+#### 2. Fit a linear model using both `Intensity` and `Time` as explanatory variables.  Print a summary of the model fit.
+
+```{r}
+
+```
+
+#### 3. In the model summary output, there should be a reference to a variable called `TimeEarly`.  What are the possible values of that variable, and under what circumstances does the variable have each of those values?
+
+
+
+#### 4. Write down a single combined equation for the estimated mean number of flowers as a function of the `TimeEarly` and `Intensity` variables.
+
+
+
+#### 5. Write down two separate equations: one for the estimated mean number of flowers as a function of `Intensity` in the population of flowers when the light is turned on early, and a second for the estimated mean number of flowers as a function of `Intensity` in the population of flowers when the light is turned on late.
+
+
+
+#### 6. Conduct a test of the claim that separate intercepts are not needed for the two timing conditions.  State your hypotheses in terms of equations involving one or more model parameters.  Additionally, provide a sentence interpreting the meaning of the null hypothesis in context.  Your conclusion should be in terms of strength of evidence against the null hypothesis.
+
+```{r}
+
+```
+
+
+
+#### 7. Conduct a test of the claim that neither the timing nor the lighting intensity are associated with the mean number of flowers that grow.  State your hypotheses in terms of equations involving one or more model parameters.  Additionally, provide a sentence interpreting the meaning of the null hypothesis in context.  Your conclusion should be in terms of strength of evidence against the null hypothesis.
+
+```{r}
+
+```
+
+
+
+#### 8. Find and interpret a 95% confidence interval for the coefficient of the `TimeEarly` variable.
+
+```{r}
+
+```
+
+
+
+#### 9. Find a 95% prediction interval for the number of flowers that will grow under the early lighting condition with a lighting intensity of 450 $\mu$mol/m$^2$/sec.  Interpret your interval in context.
+
+```{r}
+
+```
+
+
