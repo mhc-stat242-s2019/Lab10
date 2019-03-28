@@ -1,5 +1,5 @@
 ---
-title: "Two Parallel Lines"
+title: "Two Lines"
 subtitle: "Sleuth3 Chapters 9 and 10"
 output:
   pdf_document:
@@ -67,7 +67,7 @@ head(meadowfoam)
 
 ```
 
-#### 2. Fit a linear model using both `Intensity` and `Time` as explanatory variables.  Print a summary of the model fit.
+#### 2. Fit a linear model using both `Intensity` and `Time` as explanatory variables, allowing for the slope of the line describing the relationship between light intensity and average number of flowers to be different for the two `Time` settings.  Print a summary of the model fit.
 
 ```{r}
 
@@ -85,7 +85,7 @@ head(meadowfoam)
 
 
 
-#### 6. Conduct a test of the claim that separate intercepts are not needed for the two timing conditions.  State your hypotheses in terms of equations involving one or more model parameters.  Additionally, provide a sentence interpreting the meaning of the null hypothesis in context.  Your conclusion should be in terms of strength of evidence against the null hypothesis.
+#### 6. Conduct a test of the claim that separate slopes are not needed for the two timing conditions.  State your hypotheses in terms of equations involving one or more model parameters.  Additionally, provide a sentence interpreting the meaning of the null hypothesis in context.  Your conclusion should be in terms of strength of evidence against the null hypothesis.
 
 ```{r}
 
@@ -93,7 +93,18 @@ head(meadowfoam)
 
 
 
-#### 7. Conduct a test of the claim that neither the timing nor the lighting intensity are associated with the mean number of flowers that grow.  State your hypotheses in terms of equations involving one or more model parameters.  Additionally, provide a sentence interpreting the meaning of the null hypothesis in context.  Your conclusion should be in terms of strength of evidence against the null hypothesis.
+#### 7. Fit a model where the constraint is imposed that the two lines have the same slope, and show the summary output.
+
+```{r}
+lm_fit <- lm(Flowers ~ Time + Intensity, data = meadowfoam)
+summary(lm_fit)
+```
+
+#### 8. Based on the model from part 7, conduct a test of the claim that separate intercepts are not needed for the two timing conditions.  State your hypotheses in terms of equations involving one or more model parameters.  Additionally, provide a sentence interpreting the meaning of the null hypothesis in context.  Your conclusion should be in terms of strength of evidence against the null hypothesis.
+
+
+
+#### 9. Conduct a test of the claim that neither the timing nor the lighting intensity are associated with the mean number of flowers that grow, based on your model from part 7.  State your hypotheses in terms of equations involving one or more model parameters.  Additionally, provide a sentence interpreting the meaning of the null hypothesis in context.  Your conclusion should be in terms of strength of evidence against the null hypothesis.
 
 ```{r}
 
@@ -101,7 +112,7 @@ head(meadowfoam)
 
 
 
-#### 8. Find and interpret a 95% confidence interval for the coefficient of the `TimeEarly` variable.
+#### 10. Find and interpret a 95% confidence interval for the coefficient of the `TimeEarly` variable in the model fit from part 7.
 
 ```{r}
 
@@ -109,7 +120,7 @@ head(meadowfoam)
 
 
 
-#### 9. Find a 95% prediction interval for the number of flowers that will grow under the early lighting condition with a lighting intensity of 450 $\mu$mol/m$^2$/sec.  Interpret your interval in context.
+#### 11. Based on your model fit from part 7, find a 95% prediction interval for the number of flowers that will grow under the early lighting condition with a lighting intensity of 450 $\mu$mol/m$^2$/sec.  Interpret your interval in context.
 
 ```{r}
 
